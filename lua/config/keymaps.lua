@@ -39,6 +39,19 @@ vim.keymap.set('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { desc = 'Move the current l
 vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { desc = 'Move the current line down' })
 vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { desc = 'Move the current line up' })
 
+-- Keybinds to move the cursor in insert mode
+-- NOTE: Remember that in iterm2 you shoul add the
+--  1 Click the "+" button to add a new key mapping.
+--  2 In the Keyboard Shortcut field, press <C-h> or <C-l>
+--  3 For Action, choose Send Escape Sequence
+--  In the Esc+ field, enter:
+--    for <C-h> -> [D
+--    for <C-l> -> [C
+vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true, silent = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
