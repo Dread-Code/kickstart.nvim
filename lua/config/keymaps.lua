@@ -21,6 +21,10 @@ vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('i', '<left>', '<cmd>echo "Use <M-h> to move!!"<CR>')
+vim.keymap.set('i', '<right>', '<cmd>echo "Use <M-l> to move!!"<CR>')
+vim.keymap.set('i', '<up>', '<cmd>echo "Use <M-k> to move!!"<CR>')
+vim.keymap.set('i', '<down>', '<cmd>echo "Use <M-j> to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -32,38 +36,17 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Keybinds to move the current o selected line up or down
-vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { desc = 'Move the current line down' })
-vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { desc = 'Move the current line up' })
-vim.keymap.set('i', '<M-j>', '<Esc>:m .+1<CR>==gi', { desc = 'Move the current line down' })
-vim.keymap.set('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { desc = 'Move the current line up' })
-vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { desc = 'Move the current line down' })
-vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { desc = 'Move the current line up' })
+vim.keymap.set('n', '<M-S-j>', ':m .+1<CR>==', { desc = 'Move the current line down' })
+vim.keymap.set('n', '<M-S-k>', ':m .-2<CR>==', { desc = 'Move the current line up' })
+vim.keymap.set('i', '<M-S-j>', '<Esc>:m .+1<CR>==gi', { desc = 'Move the current line down' })
+vim.keymap.set('i', '<M-S-k>', '<Esc>:m .-2<CR>==gi', { desc = 'Move the current line up' })
+vim.keymap.set('v', '<M-S-j>', ":m '>+1<CR>gv=gv", { desc = 'Move the current line down' })
+vim.keymap.set('v', '<M-S-k>', ":m '<-2<CR>gv=gv", { desc = 'Move the current line up' })
 
 -- Keybinds to move the cursor in insert mode
--- NOTE: Remember that in iterm2 you shoul add the
---  1 Click the "+" button to add a new key mapping.
---  2 In the Keyboard Shortcut field, press <C-h> or <C-l>
---  3 For Action, choose Send Escape Sequence
---  In the Esc+ field, enter:
---    for <C-h> -> [D
---    for <C-l> -> [C
-vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true, silent = true })
-vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true, silent = true })
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+vim.keymap.set('i', '<M-h>', '<Left>', { noremap = true, silent = true })
+vim.keymap.set('i', '<M-l>', '<Right>', { noremap = true, silent = true })
+vim.keymap.set('i', '<M-j>', '<Down>', { noremap = true, silent = true })
+vim.keymap.set('i', '<M-k>', '<Up>', { noremap = true, silent = true })
 
 -- vim: ts=2 sts=2 sw=2 et
