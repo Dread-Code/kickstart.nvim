@@ -35,7 +35,8 @@ require('lazy').setup({
   require 'plugins.indent_line',
   require 'plugins.lint',
   require 'plugins.autopairs',
-
+  require 'plugins.test',
+  require 'plugins.null-ls',
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
