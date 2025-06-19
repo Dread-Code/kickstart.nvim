@@ -220,6 +220,21 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
+            -- Detectar entorno virtual de Poetry solo para Pyright
+            if server_name == 'pyright' then
+              local handle = io.popen 'poetry env info --path'
+              if handle then
+                local venv_path = handle:read('*a'):gsub('%s+', '') -- quita newline
+                handle:close()
+                if vim.fn.filereadable(venv_path .. '/bin/python') == 1 then
+                  server.settings = server.settings or {}
+                  server.settings.python = {
+                    pythonPath = venv_path .. '/bin/python',
+                  }
+                end
+              end
+            end
             require('lspconfig')[server_name].setup(server)
           end,
         },
