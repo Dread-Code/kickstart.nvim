@@ -166,7 +166,18 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {
+          -- Tell LSP to run “poetry run pyright-langserver --stdio”
+          cmd = { 'poetry', 'run', 'pyright-langserver', '--stdio' },
+          settings = {
+            python = {
+              analysis = {
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'workspace',
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -220,21 +231,6 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-
-            -- Detectar entorno virtual de Poetry solo para Pyright
-            if server_name == 'pyright' then
-              local handle = io.popen 'poetry env info --path'
-              if handle then
-                local venv_path = handle:read('*a'):gsub('%s+', '') -- quita newline
-                handle:close()
-                if vim.fn.filereadable(venv_path .. '/bin/python') == 1 then
-                  server.settings = server.settings or {}
-                  server.settings.python = {
-                    pythonPath = venv_path .. '/bin/python',
-                  }
-                end
-              end
-            end
             require('lspconfig')[server_name].setup(server)
           end,
         },
